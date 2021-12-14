@@ -1,7 +1,10 @@
-using HopfieldNets
-using Base.Test
-
-include(Pkg.dir("HopfieldNets", "demo", "letters.jl"))
+include("../src/HopfieldNets.jl")
+using Main.HopfieldNets
+using Test
+using LinearAlgebra
+# using Pkg
+# include(Pkg.dir("Main.HopfieldNets", "demo", "letters.jl"))
+include("../demo/letters.jl")
 
 patterns = hcat(X, O)
 

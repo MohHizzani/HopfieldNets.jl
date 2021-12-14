@@ -1,4 +1,6 @@
-type DiscreteHopfieldNet <: HopfieldNet
+using LinearAlgebra
+
+struct DiscreteHopfieldNet <: HopfieldNet
     s::Vector{Float64} # State -- could have used Int's
     W::Matrix{Float64} # Weights
 end
@@ -17,5 +19,6 @@ function update!(net::DiscreteHopfieldNet)
 end
 
 function Base.show(io::IO, net::DiscreteHopfieldNet)
-    @printf io "A discrete Hopfield net with %d neurons\n" length(net.s)
+    # @printf io "A discrete Hopfield net with %d neurons\n" length(net.s)
+    print(io, "A discrete Hopfield net with $(length(net.s)) neurons")
 end

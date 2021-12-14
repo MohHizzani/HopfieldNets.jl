@@ -1,4 +1,4 @@
-type ContinuousHopfieldNet <: HopfieldNet
+struct ContinuousHopfieldNet <: HopfieldNet
     s::Vector{Float64} # State
     W::Matrix{Float64} # Weights
 end
@@ -17,5 +17,6 @@ function update!(net::ContinuousHopfieldNet)
 end
 
 function Base.show(io::IO, net::ContinuousHopfieldNet)
-    @printf io "A continuous Hopfield net with %d neurons\n" length(net.s)
+    # @printf io "A continuous Hopfield net with %d neurons\n" length(net.s)
+    print(io, "A continuous Hopfield net with $(length(net.s)) neurons")
 end
