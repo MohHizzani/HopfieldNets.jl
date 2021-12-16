@@ -1,19 +1,40 @@
 abstract type HopfieldNet end
 
+# function energy(net::HopfieldNet)
+#     e = 0.0
+#     n = length(net.s)
+#     for i in 1:n
+#         for j in 1:n
+#             e += net.W[i, j] * net.s[i] * net.s[j]
+#         end
+#     end
+#     e *= -0.5
+#     for i in 1:n
+#         e += net.W[i] * net.s[i]
+#     end
+#     return e
+# end
+
 function energy(net::HopfieldNet)
+    N = size(net.s)
+    N_2 = size(net.W)
+    iters = Base.Iterators.product([collect(1:i) for i in N]...)
     e = 0.0
-    n = length(net.s)
-    for i in 1:n
-        for j in 1:n
-            e += net.W[i, j] * net.s[i] * net.s[j]
+    for ind in iters
+        a = []
+        for i in 1:length(N_2)
+            if i <= length(N)
+                push!(a, ind[i])
+            else
+                push!(a, :)
+            end
         end
-    end
-    e *= -0.5
-    for i in 1:n
-        e += net.W[i] * net.s[i]
+        e += dot(net.W[a...], net.s)
     end
     return e
+
 end
+
 
 function settle!(net::HopfieldNet,
                  iterations::Integer = 1_000,

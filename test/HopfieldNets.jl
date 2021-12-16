@@ -1,5 +1,13 @@
-include("../src/HopfieldNets.jl")
-using Main.HopfieldNets
+include("../src/includes.jl")
+
+
+F = rand(2,2)
+D = rand(3,3)
+
+qaph = HopfieldQAP(D, F)
+
+
+# using Main.HopfieldNets
 using Test
 using LinearAlgebra
 # using Pkg
@@ -12,6 +20,50 @@ n = size(patterns, 1)
 
 dnet = DiscreteHopfieldNet(n)
 cnet = ContinuousHopfieldNet(n)
+
+threex3 = DiscreteHopfieldNet((3,3))
+twox3 = DiscreteHopfieldNet((2,3))
+
+# N = (2,3)
+
+# a = Vector{Int}()
+
+# for i in N
+#      push!(a, repeat([i], length(N))...)
+# end
+# a
+
+cycle!(twox3)
+
+
+
+print(threex3.s[1,1])
+update!(threex3, (1,1))
+print(threex3.s[1,1])
+
+# N = size(threex3.s)
+# N_2 = size(threex3.W)
+# randInd = [shuffle(1:i) for i in N]
+
+# D = rand(Float64, 2, 2)
+# F = rand(Float64, 3, 3)
+# A = B = 2
+
+# # D & F are square matrices always
+# N = (size(D)[1],size(F)[1]) #dimensions of the Hopfield Network
+# tnet = DiscreteHopfieldNet(N)
+
+# iters = Base.Iterators.product([collect(1:i) for i in N]...)
+# for i in iters
+#     for j in iters
+#           tnet.W[i...,j...] = -2()
+
+
+# N = size(twox3.s)
+# N_2 = size(twox3.W)
+# randInd = [shuffle(1:i) for i in N]
+
+
 
 for net in [dnet, cnet]
     train!(net, patterns)
